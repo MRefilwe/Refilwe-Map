@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>Live Task Map</title>
+
+  <meta charset="utf-8" />
+
+  <link rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <style>
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+
+  // CREATE MAP
+  const map = L.map('map').setView([-26.0, 28.0], 10);
+
+  // MAP TILES
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; OpenStreetMap contributors'
+    }
+  ).addTo(map);
+
+  // LOCATIONS
+  const locations = [
+
+    {
+      lat: -25.8602437,
+      lng: 28.1898451,
+      title: "Centurion",
+      task: "Router Installation",
+      technician: "David",
+      status: "In Progress"
+    },
+
+    {
+      lat: -26.0015321,
+      lng: 27.8407124,
+      title: "Muldersdrift",
+      task: "Server Maintenance",
+      technician: "Sarah",
+      status: "Pending"
+    },
+
+    {
+      lat: -26.0937125,
+      lng: 27.9826231,
+      title: "Randburg",
+      task: "Network Inspection",
+      technician: "Mike",
+      status: "Completed"
+    }
+
+  ];
+
+  // ADD MARKERS
+  const vehicleIcon = L.icon({
+
+  iconUrl: 'https://cdn-icons-png.flaticon.com/512/744/744465.png',
+
+  iconSize: [40, 40],
+
+  iconAnchor: [20, 20]
+
+});
+  locations.forEach(location => {
+
+    L.marker([location.lat, location.lng])
+
+      .addTo(map)
+
+      .bindPopup(
+        `
+        <h2>${location.title}</h2>
+
+        <p><b>Task:</b> ${location.task}</p>
+
+        <p><b>Technician:</b> ${location.technician}</p>
+
+        <p><b>Status:</b> ${location.status}</p>
+        `
+      );
+
+  });
+
+  // ROUTE/TRAIL
+  const route = [
+
+    [-25.8602437, 28.1898451],
+
+    [-26.0015321, 27.8407124],
+
+    [-26.0937125, 27.9826231]
+
+  ];
+
+  // DRAW ROUTE
+  L.polyline(route, {
+    color: 'red',
+    weight: 4
+  }).addTo(map);
+
+</script>
+
+</body>
+
+</html>
