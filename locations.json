@@ -1,0 +1,28 @@
+[
+  {
+    "title": "Centurion",
+    "lat": -25.8602437,
+    "lng": 28.1898451,
+    "task": "Router Installation",
+    "technician": "David",
+    "status": "In Progress"
+  },
+
+  {
+    "title": "Muldersdrift",
+    "lat": -26.0015321,
+    "lng": 27.8407124,
+    "task": "Server Maintenance",
+    "technician": "Sarah",
+    "status": "Pending"
+  },
+
+  {
+    "title": "Randburg",
+    "lat": -26.0937125,
+    "lng": 27.9826231,
+    "task": "Network Inspection",
+    "technician": "Mike",
+    "status": "Completed"
+  }
+]
