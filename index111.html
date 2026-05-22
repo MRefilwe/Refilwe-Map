@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>Live Task Map</title>
+
+  <meta charset="utf-8" />
+
+  <link rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <style>
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      height: 100px;
+      width: 100%;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+
+  // CREATE MAP
+  const map = L.map('map').setView([-26.0, 28.0], 10);
+
+  // MAP TILES
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; OpenStreetMap contributors'
+    }
+  ).addTo(map);
+
+  // LOCATIONS
+  const locations = [
+
+    // READ URL PARAMETERS
+const params = new URLSearchParams(window.location.search);
+
+// GET LATITUDE/LONGITUDE
+const lat = parseFloat(params.get("lat"));
+
+const lng = parseFloat(params.get("lng"));
+
+const title = params.get("title");
+
+// CHECK IF VALUES EXIST
+if (!isNaN(lat) && !isNaN(lng)) {
+
+  // CREATE MARKER
+  L.marker([lat, lng])
+
+    .addTo(map)
+
+    .bindPopup(title || "Dynamic Location")
+
+    .openPopup();
+
+  // CENTER MAP
+  map.setView([lat, lng], 12);
+
+}
+
+  ];
+
+  // ADD MARKERS
+  const vehicleIcon = L.icon({
+
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+
+  iconSize: [25, 41],
+
+  iconAnchor: [12, 41],
+
+  popupAnchor: [1, -34],
+
+  shadowSize: [41, 41]
+
+});
+
+});
+
+});
+
+
+</script>
+
+</body>
+
+</html>
