@@ -18,7 +18,7 @@
     }
 
     #map {
-      height: 100vh;
+      height: 100px;
       width: 100%;
     }
 
@@ -45,37 +45,7 @@
     }
   ).addTo(map);
 
-  // LOCATIONS
-  const locations = [
-
-    {
-      lat: -25.8602437,
-      lng: 28.1898451,
-      title: "Centurion",
-      task: "Router Installation",
-      technician: "David",
-      status: "In Progress"
-    },
-
-    {
-      lat: -26.0015321,
-      lng: 27.8407124,
-      title: "Muldersdrift",
-      task: "Server Maintenance",
-      technician: "Sarah",
-      status: "Pending"
-    },
-
-    {
-      lat: -26.0937125,
-      lng: 27.9826231,
-      title: "Randburg",
-      task: "Network Inspection",
-      technician: "Mike",
-      status: "Completed"
-    }
-
-  ];
+  
 
   // ADD MARKERS
   locations.forEach(location => {
@@ -109,12 +79,7 @@
 
   ];
 
-  // DRAW ROUTE
-  L.polyline(route, {
-    color: 'red',
-    weight: 4
-  }).addTo(map);
-
+  
 </script>
 
 </body>
