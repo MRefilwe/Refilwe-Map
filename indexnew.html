@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>Dynamic URL Map</title>
+
+  <meta charset="utf-8" />
+
+  <link rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <style>
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+
+  // CREATE MAP
+  const map = L.map('map').setView([-26.0, 28.0], 5);
+
+  // LOAD MAP TILES
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; OpenStreetMap contributors'
+    }
+  ).addTo(map);
+
+  // READ URL PARAMETERS
+  const params = new URLSearchParams(window.location.search);
+
+  // STORE MARKERS
+  const markers = [];
+
+  // LOOP THROUGH MULTIPLE LOCATIONS
+  for (let i = 1; i <= 10; i++) {
+
+    const locationData = params.get(`loc${i}`);
+
+    if (locationData) {
+
+      // SPLIT URL VALUES
+      const parts = locationData.split(",");
+
+      const lat = parseFloat(parts[0]);
+
+      const lng = parseFloat(parts[1]);
+
+      const title = parts[2] || "Dynamic Location";
+
+      // CREATE MARKER
+      const marker = L.marker([lat, lng])
+
+        .addTo(map)
+
+        .bindPopup(title);
+
+      // SAVE MARKER
+      markers.push(marker);
+
+    }
+
+  }
+
+  // AUTO-ZOOM TO FIT ALL MARKERS
+  if (markers.length > 0) {
+
+    const group = L.featureGroup(markers);
+
+    map.fitBounds(group.getBounds());
+
+  }
+
+</script>
+
+</body>
+
+</html>
