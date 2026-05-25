@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>Map</title>
+
+  <meta charset="utf-8" />
+
+  <!-- LEAFLET CSS -->
+  <link rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <style>
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<!-- LEAFLET JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+  // CREATE MAP
+  const map = L.map('map').setView([-26.0, 28.0], 5);
+
+  // LOAD MAP TILES
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; OpenStreetMap contributors'
+    }
+  ).addTo(map);
+
+  // READ URL PARAMETERS
+  const params = new URLSearchParams(window.location.search);
+
+  // LOOP THROUGH LOCATIONS
+  for (let i = 1; i <= 10; i++) {
+
+    const locationData = params.get(`loc${i}`);
+
+    if (locationData) {
+
+      const parts = locationData.split(",");
+
+      const lat = parseFloat(parts[0]);
+
+      const lng = parseFloat(parts[1]);
+
+      const title = parts[2] || "Dynamic Location";
+
+      L.marker([lat, lng])
+
+        .addTo(map)
+
+        .bindPopup(title)
+
+        .openPopup();
+
+    }
+
+  }
+
+</script>
+
+</body>
+
+</html>
